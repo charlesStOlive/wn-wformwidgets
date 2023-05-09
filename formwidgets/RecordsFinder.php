@@ -446,7 +446,7 @@ class RecordsFinder extends FormWidgetBase
 
         $existingValues = $this->getLoadValue();
         $existingIds = array_keys($existingValues);
-        trace_log($this->scope);
+        //trace_log($this->scope);
 
         $widget->bindEvent('list.extendQueryBefore', function ($query) use ($existingIds) {
             $query->whereNotIn('id',$existingIds);

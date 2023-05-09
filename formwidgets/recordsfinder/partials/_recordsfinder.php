@@ -13,11 +13,17 @@ if ($this->previewMode || $field->readOnly) {
     <span class="form-control" <?= $previewMode ? 'disabled="disabled"' : '' ?>>
         <?php if ($selectedValues): ?>
             <?php foreach($selectedValues as $key=>$value) : ?>
-                <button class="selected-value button-no-border"  data-request="<?= $this->getEventHandler('onClearOneRecord') ?>"
-                    data-request-data="clearRecordId:'<?=$key?>'">
-                    <?= $value; ?>
-                <i class="icon-times"></i>
-                </button>
+                <?php if($previewMode) : ?>
+                    <div class="selected-value button-no-border">
+                        <?= $value; ?>
+                    </div>
+                <?php else : ?>
+                    <button class="selected-value button-no-border"  data-request="<?= $this->getEventHandler('onClearOneRecord') ?>"
+                        data-request-data="clearRecordId:'<?=$key?>'">
+                        <?= $value; ?>
+                    <i class="icon-times"></i>
+                    </button>
+                <?php endif  ?>
             <?php endforeach ?>
         <?php else: ?>
             <span class="text-muted"><?= $prompt ?></span>
