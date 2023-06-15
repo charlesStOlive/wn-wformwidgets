@@ -1,8 +1,8 @@
 <?php namespace Waka\Wformwidgets;
 
 use Backend;
-use Backend\Models\UserRole;
 use System\Classes\PluginBase;
+use System\Classes\CombineAssets;
 
 /**
  * wformwidget Plugin Information File
@@ -31,6 +31,9 @@ class Plugin extends PluginBase
      */
     public function register()
     {
+        CombineAssets::registerCallback(function ($combiner) {
+            $combiner->registerBundle('~/plugins/waka/wformwidgets/formwidgets/wakaupload/assets/less/wakaupload.less');
+        });
     }
 
     /**
@@ -48,6 +51,7 @@ class Plugin extends PluginBase
             'Waka\Wformwidgets\FormWidgets\Treejs' => 'treejs',
             'Waka\Wformwidgets\FormWidgets\RecordsFinder' => 'wrecordsfinder',
             'Waka\Wformwidgets\FormWidgets\StarRating' => 'wstarrating',
+            'Waka\Wformwidgets\FormWidgets\WakaUpload' => 'wakaupload',
         ];
     }
 
