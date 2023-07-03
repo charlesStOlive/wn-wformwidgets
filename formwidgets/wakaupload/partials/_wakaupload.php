@@ -4,7 +4,7 @@
 
 <?php else: ?>
     <?php if ($partial_upload) {
-        trace_log('makePartial');
+        //trace_log('makePartial');
         echo $this->makePartial($partial_upload);       
     } else {  switch ($displayMode) {
             case 'image-single':

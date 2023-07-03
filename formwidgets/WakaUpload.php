@@ -137,8 +137,8 @@ class WakaUpload extends FormWidgetBase
      */
     protected function prepareVars()
     {
-        trace_log('preparevars');
-        trace_log($this->getFieldName());
+        //trace_log('preparevars');
+        //trace_log($this->getFieldName());
         if ($this->formField->disabled) {
             $this->previewMode = true;
         }
@@ -393,7 +393,7 @@ class WakaUpload extends FormWidgetBase
      */
     public function onSaveAttachmentConfig()
     {
-        trace_log("onSaveAttachmentConfig");
+        //trace_log("onSaveAttachmentConfig");
         try {
             $formWidget = $this->getConfigFormWidget();
             if ($file = $formWidget->model) {
