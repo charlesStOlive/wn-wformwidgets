@@ -61,6 +61,11 @@ class WakaUpload extends FormWidgetBase
     public $mimeTypes = false;
 
     /**
+     * @var mixed Collection of acceptable mime types.
+     */
+    public $sendToApi = false;
+
+    /**
      * @var mixed Max file size.
      */
     public $maxFilesize;
@@ -114,6 +119,7 @@ class WakaUpload extends FormWidgetBase
             'thumbOptions',
             'useCaption',
             'attachOnUpload',
+            'sendToApi',
         ]);
 
         if ($this->formField->disabled) {
@@ -480,8 +486,11 @@ class WakaUpload extends FormWidgetBase
 
             $file->data = $data;
             $file->save();
-            $file->sendToApi();
-            $file->save();
+            if($this->sendToApi) {
+                $file->sendToApi();
+                $file->save();
+            }
+            
 
 
             /**
