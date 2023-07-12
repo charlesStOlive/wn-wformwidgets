@@ -34,6 +34,12 @@ class Plugin extends PluginBase
         CombineAssets::registerCallback(function ($combiner) {
             $combiner->registerBundle('~/plugins/waka/wformwidgets/formwidgets/wakaupload/assets/less/wakaupload.less');
         });
+
+        \Event::listen('backend.page.beforeDisplay', function ($controller, $action, $params) {
+            $controller->addJs('/plugins/waka/wformwidgets/assets/js/froala.js');
+            $controller->addJs('/plugins/waka/wformwidgets/assets/js/clipboard.min.js');
+            /**NODS-C*/$controller->addCss('/plugins/wcli/wconfig/assets/css/waka.css');
+        });
     }
 
     /**
@@ -52,6 +58,9 @@ class Plugin extends PluginBase
             'Waka\Wformwidgets\FormWidgets\RecordsFinder' => 'wrecordsfinder',
             'Waka\Wformwidgets\FormWidgets\StarRating' => 'wstarrating',
             'Waka\Wformwidgets\FormWidgets\WakaUpload' => 'wakaupload',
+            'Waka\WformWidgets\FormWidgets\ColorPickerAnalyser' => 'colorpickeranalyser',
+            'Waka\WformWidgets\FormWidgets\CommentField' => 'commentfield',
+            'Waka\WformWidgets\FormWidgets\WakaRichEditor' => 'wakaeditor',
         ];
     }
 
