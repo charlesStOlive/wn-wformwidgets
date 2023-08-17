@@ -1,0 +1,26 @@
+/* Styles généraux */
+.video-form {
+    display: flex;
+    flex-wrap: wrap; /* pour gérer le passage sur plusieurs lignes si nécessaire, en particulier sur les petits écrans */
+}
+
+.video_canvas {
+    width: 580px;
+    overflow: hidden;
+}
+
+.video_primary_form {
+    padding-top: 20px;
+    flex: 1 1 0%;
+}
+
+/* Styles pour les appareils mobiles */
+@media (max-width: 768px) { /* considéré comme un point de rupture standard pour les appareils mobiles */
+    .video_canvas {
+        width: 500px;
+    }
+    .video_primary_form {
+        padding-top: 20px;
+    }
+
+}

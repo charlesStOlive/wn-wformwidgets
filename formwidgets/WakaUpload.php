@@ -87,6 +87,28 @@ class WakaUpload extends FormWidgetBase
      * @var boolean Automatically attaches the uploaded file on upload if the parent record exists instead of using deferred binding to attach on save of the parent record. Defaults to false.
      */
     public $attachOnUpload = true;
+    //
+
+    /**
+     * @var string permet de modifier le partial pour l'uplaod, si vide utilise le principe de backend/fileUpload
+     */
+    public $partial_upload = null;
+
+    /**
+     * @var string permet de modifier  le partial , si vide utilise le partial de base config_form
+     */
+    public $partial_config = null;
+
+    /**
+     * @var string permet de modifier la config yaml pour le form de gestion de l'objet/ si vide utilise celui de backend/fileupload
+     */
+    public $option_config_yaml = '~/modules/system/models/file/fields.yaml';
+
+    /**
+     * @var string spécifie le mode à exploiter 
+     */
+    public $mode = null;
+
 
     //
     // Object properties
@@ -120,7 +142,28 @@ class WakaUpload extends FormWidgetBase
             'useCaption',
             'attachOnUpload',
             'sendToApi',
+            'mode',
+            'partial_upload',
+            'partial_config',
+            'option_config_yaml',
         ]);
+
+        $autoConfig = \Config::get($this->getConfig('autoConfig', []));
+        trace_log($autoConfig);
+        if(!empty($autoConfig)) {
+            if($mode = $autoConfig['mode'] ?? false && !$this->mode) {
+                $this->mode = $mode;
+            }
+            if($partial_upload = $autoConfig['partial_upload'] ?? false && !$this->partial_upload) {
+                $this->partial_upload = $partial_upload;
+            }
+            if($partial_config = $autoConfig['partial_config'] ?? false && !$this->partial_config) {
+                $this->partial_config = $partial_config;
+            }
+            if($option_config_yaml = $autoConfig['option_config_yaml'] ?? false && $this->option_config_yaml != '~/modules/system/models/file/fields.yaml') {
+                $this->option_config_yaml = $option_config_yaml;
+            }
+        }
 
         if ($this->formField->disabled) {
             $this->previewMode = true;
@@ -165,7 +208,7 @@ class WakaUpload extends FormWidgetBase
         $this->vars['singleFile'] = $fileList->first();
         $this->vars['displayMode'] = $this->getDisplayMode();
 
-        $this->vars['partial_upload'] = $this->getConfig('partial_upload', null);
+        $this->vars['partial_upload'] = $this->partial_upload;
         $this->vars['emptyIcon'] = $this->getConfig('emptyIcon', 'icon-upload');
         $this->vars['imageHeight'] = $this->imageHeight;
         $this->vars['imageWidth'] = $this->imageWidth;
@@ -204,7 +247,7 @@ class WakaUpload extends FormWidgetBase
             return $this->configFormWidget;
         }
 
-        $config = $this->makeConfig($this->getConfig('config_yaml'));
+        $config = $this->makeConfig($this->option_config_yaml);
         $config->model = $this->getFileRecord() ?: $this->getRelationModel();
         $config->alias = $this->alias . $this->defaultAlias;
         $config->arrayName = $this->getFieldName();
@@ -240,7 +283,7 @@ class WakaUpload extends FormWidgetBase
      */
     protected function getDisplayMode()
     {
-        $mode = $this->getConfig('mode', 'image');
+        $mode = $this->mode;
 
         if (str_contains($mode, '-')) {
             return $mode;
@@ -383,7 +426,7 @@ class WakaUpload extends FormWidgetBase
             $this->vars['cssDimensions'] = $this->getCssDimensions();
             $this->vars['parentElementId'] = $this->getId();
 
-            $partialConfig = $this->getConfig('partial_config', null);
+            $partialConfig = $this->partial_config;
             if($partialConfig) {
                 return $this->makePartial($partialConfig);
             } else {
@@ -399,7 +442,6 @@ class WakaUpload extends FormWidgetBase
      */
     public function onSaveAttachmentConfig()
     {
-        //trace_log("onSaveAttachmentConfig");
         try {
             $formWidget = $this->getConfigFormWidget();
             if ($file = $formWidget->model) {
@@ -416,7 +458,7 @@ class WakaUpload extends FormWidgetBase
 
             throw new ApplicationException('Unable to find file, it may no longer exist');
         }
-        catch (Exception $ex) {
+        catch (ApplicationException $ex) {
             return json_encode(['error' => $ex->getMessage()]);
         }
     }
@@ -426,7 +468,8 @@ class WakaUpload extends FormWidgetBase
      */
     protected function loadAssets()
     {
-        $this->addCss('css/wakaupload.css', 'core');
+        $this->addCss('css/wakaupload.css', 'Waka.WformWidgets');
+         $this->addCss('css/video.css', 'Waka.WformWidgets');
         $this->addJs('js/wakaupload.js', 'core');
     }
 
