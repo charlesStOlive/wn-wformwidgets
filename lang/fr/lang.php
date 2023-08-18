@@ -617,5 +617,14 @@ return [
         'rename_new_name' => 'Nouveau nom',
         'move_please_select' => 'Faire une sélection',
         'move_button' => 'Déplacer'
+    ],
+    'wakaupload' => [
+        'remove_confirm' => 'Voulez vous vraiment supprimer cet objet ?',
+        'attachment' => 'Fichier attaché',
+        'upload_file' => 'Cgharger un fichier',
+        'default_prompt' => 'Cgarger un fichier',
+        'attachment_url' => 'URL de la pièce',
+        'upload_error' => 'Erreur de chargement',
+        'remove_file' => 'Supprimer le fichier'
     ]
 ];

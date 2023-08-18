@@ -35,7 +35,7 @@
                             href="javascript:;"
                             class="upload-remove-button"
                             data-request="<?= $this->getEventHandler('onRemoveAttachment') ?>"
-                            data-request-confirm="<?= e(trans('backend::lang.wakaupload.remove_confirm')) ?>"
+                            data-request-confirm="<?= e(trans('waka.wformwidgets::lang.wakaupload.remove_confirm')) ?>"
                             data-request-data="file_id: <?= $file->id ?>"
                             ><i class="icon-times"></i></a>
                     </h4>
@@ -63,7 +63,7 @@
                     href="javascript:;"
                     class="upload-remove-button"
                     data-request="<?= $this->getEventHandler('onRemoveAttachment') ?>"
-                    data-request-confirm="<?= e(trans('backend::lang.wakaupload.remove_confirm')) ?>"
+                    data-request-confirm="<?= e(trans('waka.wformwidgets::lang.wakaupload.remove_confirm')) ?>"
                     ><i class="icon-times"></i></a>
             </h4>
             <p class="size" data-dz-size></p>

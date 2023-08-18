@@ -9,23 +9,23 @@
                     src="<?= $file->thumbUrl ?>"
                     class="img-responsive center-block"
                     alt=""
-                    title="<?= e(trans('backend::lang.wakaupload.attachment')) ?>: <?= e($file->file_name) ?>"
+                    title="<?= e(trans('waka.wformwidgets::lang.wakaupload.attachment')) ?>: <?= e($file->file_name) ?>"
                     style="<?= $cssDimensions ?>" />
             </div>
         <?php else: ?>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="popup">&times;</button>
-                <h4 class="modal-title"><?= e(trans('backend::lang.wakaupload.attachment')) ?>: <?= $file->file_name ?></h4>
+                <h4 class="modal-title"><?= e(trans('waka.wformwidgets::lang.wakaupload.attachment')) ?>: <?= $file->file_name ?></h4>
             </div>
         <?php endif ?>
         <div class="modal-body">
-            <p><?= e(trans('backend::lang.wakaupload.help')) ?></p>
+            <p><?= e(trans('waka.wformwidgets::lang.wakaupload.help')) ?></p>
 
             <?= $this->getConfigFormWidget()->render(); ?>
         </div>
         <div class="modal-footer">
             <a href="<?= $file->pathUrl ?>" class="pull-left btn btn-link wakaupload-url-button" target="_blank">
-                <i class="wn-icon-link"></i><?= e(trans('backend::lang.wakaupload.attachment_url')) ?>
+                <i class="wn-icon-link"></i><?= e(trans('waka.wformwidgets::lang.wakaupload.attachment_url')) ?>
             </a>
             <button
                 type="submit"
