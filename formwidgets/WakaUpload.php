@@ -151,7 +151,7 @@ class WakaUpload extends FormWidgetBase
         ]);
 
         $autoConfig = \Config::get($this->getConfig('autoConfig', []));
-        trace_log($autoConfig);
+        // trace_log($autoConfig);
         if (!empty($autoConfig)) {
             if ($mode = $autoConfig['mode'] ?? false && !$this->mode) {
                 $this->mode = $mode;
@@ -574,7 +574,7 @@ class WakaUpload extends FormWidgetBase
             $response = Response::make($ex->getMessage(), 400);
         }
 
-        trace_log($response);
+        // trace_log($response);
 
         return $response;
     }
